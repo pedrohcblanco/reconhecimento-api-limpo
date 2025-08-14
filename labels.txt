@@ -1,2 +1,2 @@
-0 dragão
-1 dinossauro
+0 Azul
+1 Vermelho
