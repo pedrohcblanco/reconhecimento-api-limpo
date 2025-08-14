@@ -6,8 +6,10 @@ import os
 
 app = Flask(__name__)
 
-# Carregar modelo treinado no Teachable Machine
-model = tf.keras.models.load_model("model.savedmodel", compile=False)
+# Carregar modelo SavedModel como camada TFSMLayer (inference only)
+model = tf.keras.Sequential([
+    tf.keras.layers.TFSMLayer("model.savedmodel", call_endpoint="serving_default")
+])
 
 # Carregar labels
 with open("labels.txt", "r") as f:
@@ -30,7 +32,7 @@ def predict():
     image = Image.open(file.stream).convert("RGB")
     img_array = preprocess_image(image)
 
-    prediction = model.predict(img_array)
+    prediction = model(img_array)  # note que agora chamamos o modelo como layer
     predicted_index = int(np.argmax(prediction))
     predicted_label = labels[predicted_index]
     confidence = float(prediction[0][predicted_index])
