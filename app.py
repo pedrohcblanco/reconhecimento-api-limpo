@@ -7,7 +7,7 @@ import os
 app = Flask(__name__)
 
 # Carregar modelo treinado no Teachable Machine
-model = tf.keras.models.load_model("keras_model2.h5", compile=False)
+model = tf.keras.models.load_model("azul_vermelho.h5", compile=False)
 
 # Carregar labels
 with open("labels.txt", "r") as f:
