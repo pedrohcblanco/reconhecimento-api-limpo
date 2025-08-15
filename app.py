@@ -5,6 +5,9 @@ from PIL import Image
 import os
 
 app = Flask(__name__)
+from flask_cors import CORS
+
+CORS(app)
 
 # Carregar modelo SavedModel como camada TFSMLayer (inference only)
 model = tf.keras.Sequential([
